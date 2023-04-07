@@ -2,9 +2,9 @@ package com.github.zipcodewilmington;
 
 public class Node {
 
+    String key;
     String value;
     Node next;
-    String key;
 
     public String getValue() {
         return value;

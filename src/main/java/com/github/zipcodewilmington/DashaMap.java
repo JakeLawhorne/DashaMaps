@@ -12,10 +12,12 @@ public class DashaMap implements HashMapX{
     @Override
     public void set(String key, String value) {
 
+
     }
 
     @Override
     public String delete(String key) {
+
         return null;
     }
 
@@ -35,7 +37,7 @@ public class DashaMap implements HashMapX{
     }
 
     @Override
-    public boolean bucketSize(String key) {
-        return false;
+    public long bucketSize(String key) {
+        return 0;
     }
 }
