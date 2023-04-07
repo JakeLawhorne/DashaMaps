@@ -7,6 +7,12 @@ package com.github.zipcodewilmington;
  */
 public class DashaMap implements HashMapX{
 
+    /*  The second version would be the exact same code except it would be .charAt(1) - 97.
+        The third one would require a very different hasFunction. We would need to account
+        for when the value is greater than or less than the alphabet ascii numbers.
+        Also, we would have to modify the set function to ignore key values
+        less than 2. Other than that I believe the functionality would remain the same.
+     */
     Node[] arr = new Node[26];
 
     private int hashFunctionOne(String input) {
@@ -21,7 +27,8 @@ public class DashaMap implements HashMapX{
         int index = hashFunctionOne(key);
         Node current = arr[index];
         if(current == null){
-            current = new Node(key, value);
+            arr[index] = new Node(key, value);
+            return;
         }
         while(current.getNext() != null){
             current = current.getNext();
@@ -31,21 +38,42 @@ public class DashaMap implements HashMapX{
 
     @Override
     public String delete(String key) {
+        int index = hashFunctionOne(key);
+        Node current = arr[index];
+        Node previous = null;
+        if(bucketSize(key) < 2){
+            arr[hashFunctionOne(key)] = null;
+            return ""; //fix later
+        }
+        while(current != null){
+            if(current.getKey().equals(key)){
+                String val = current.getValue();
+                current = current.getNext();
+                previous.setNext(current);
+                return val;
+            }
+            previous = current;
+            current = current.getNext();
+        }
 
-        return null;
+        return current.getValue();
     }
 
     @Override
     public String get(String key) {
+        int index = hashFunctionOne(key);
+        Node current = arr[index];
 
-        return null;
+        while(current.getNext() != null){
+            if(current.getKey().equals(key)){
+                return current.getValue();
+            } current = current.getNext();
+        }
+        return current.getValue();
     }
 
     @Override
-    public boolean isEmpty() {
-
-        return false;
-    }
+    public boolean isEmpty(){return size() == 0;}
 
     @Override
     public long size() {
@@ -53,7 +81,7 @@ public class DashaMap implements HashMapX{
         for (int i = 0; i < arr.length; i++) {
             Node current = arr[i];
 
-            while(current.next != null){
+            while(current != null){
                 count++;
                 current = current.getNext();
             }
@@ -67,7 +95,7 @@ public class DashaMap implements HashMapX{
         int index = hashFunctionOne(key);
         Node current = arr[index];
 
-        while(current.next != null){
+        while(current != null){
             count++;
             current = current.getNext();
         }
