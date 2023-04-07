@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -9,8 +10,16 @@ import org.junit.Test;
  */
 public class DashaMap1Test {
 
+    DashaMap map;
+
+    @Before
+    public void before(){
+        map = new DashaMap();
+    }
     @Test
     public void testSet(){
+
+
 
     }
 

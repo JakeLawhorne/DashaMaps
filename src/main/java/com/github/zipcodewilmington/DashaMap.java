@@ -7,6 +7,8 @@ package com.github.zipcodewilmington;
  */
 public class DashaMap implements HashMapX{
 
+    Node[] arr = new Node[26];
+
     @Override
     public void set(String key, String value) {
 
